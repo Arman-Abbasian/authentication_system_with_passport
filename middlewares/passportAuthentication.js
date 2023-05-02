@@ -17,8 +17,15 @@ function redirectIfIsAuth(req,res,next){
     if(req.isAuthenticated()) res.redirect ("/profile")
     return next()
 }
+function logout(req,res,next){
+    req.logOut({keepSessionInfo:false},(err)=>{
+        if(err) console.log(err)
+    });
+    res.redirect("/login")
+}
 module.exports={
     passportAuthentication,
     checkAuthentication,
-    redirectIfIsAuth
+    redirectIfIsAuth,
+    logout
 }
